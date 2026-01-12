@@ -365,10 +365,15 @@ section {
 .app-icon-img {
     width: 80px;
     height: 80px;
+    min-width: 80px;
+    min-height: 80px;
+    max-width: 80px;
+    max-height: 80px;
     border-radius: var(--radius-md);
     margin-bottom: 1.5rem;
     object-fit: cover;
     box-shadow: var(--shadow-md);
+    flex-shrink: 0;
 }
 
 .app-card h3 {
