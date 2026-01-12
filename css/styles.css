@@ -362,6 +362,15 @@ section {
     border-radius: 10px;
 }
 
+.app-icon-img {
+    width: 80px;
+    height: 80px;
+    border-radius: var(--radius-md);
+    margin-bottom: 1.5rem;
+    object-fit: cover;
+    box-shadow: var(--shadow-md);
+}
+
 .app-card h3 {
     margin-bottom: 0.5rem;
 }
