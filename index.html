@@ -2,140 +2,254 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Module Mango - Crafting beautiful, intuitive mobile applications. We build apps that make a difference.">
-    <meta name="keywords" content="app development, mobile apps, iOS, Android, Module Mango">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0a0a0a">
+    <meta name="description" content="Module Mango — an independent app development studio building fast, thoughtful mobile applications.">
+    <meta name="keywords" content="app development, mobile apps, iOS, Android, indie studio, Module Mango">
     <meta name="author" content="Module Mango">
 
-    <!-- Open Graph -->
-    <meta property="og:title" content="Module Mango - App Development">
-    <meta property="og:description" content="Crafting beautiful, intuitive mobile applications that make a difference.">
+    <meta property="og:title" content="Module Mango — App Development Studio">
+    <meta property="og:description" content="Independent studio building fast, thoughtful mobile applications.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://modulemango.com">
 
-    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Module Mango - App Development">
-    <meta name="twitter:description" content="Crafting beautiful, intuitive mobile applications that make a difference.">
+    <meta name="twitter:title" content="Module Mango — App Development Studio">
+    <meta name="twitter:description" content="Independent studio building fast, thoughtful mobile applications.">
 
-    <title>Module Mango - App Development</title>
+    <title>Module Mango — App Development Studio</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
 
     <link rel="stylesheet" href="css/styles.css">
 
-    <!-- Favicon (emoji fallback) -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥭</text></svg>">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%234ade80'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='ui-monospace,SFMono-Regular,Menlo,monospace' font-size='16' font-weight='700' fill='%230a0a0a'%3Emm%3C/text%3E%3C/svg%3E">
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <nav class="nav container">
-            <a href="/" class="logo">
-                <span class="logo-icon">🥭</span>
-                <span>Module Mango</span>
-            </a>
-            
+    <!-- Boot overlay — sequenced, then removed -->
+    <div class="boot" id="boot" aria-hidden="true">
+        <div class="boot-inner">
+            <div class="boot-header">
+                <span class="monogram" aria-hidden="true">mm</span>
+                <span>modulemango<span class="dim">.com</span></span>
+            </div>
+            <div class="boot-line"><span class="status ok">[ OK ]</span> mounting /modulemango</div>
+            <div class="boot-line"><span class="status ok">[ OK ]</span> loading runtime</div>
+            <div class="boot-line"><span class="status ok">[ OK ]</span> fetching assets</div>
+            <div class="boot-line" id="bootLast"><span class="status pending">[ .. ]</span> booting ui<span class="dots"></span></div>
+            <div class="boot-bar" aria-hidden="true"><span></span></div>
+        </div>
+    </div>
 
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#apps">Apps</a></li>
-                <li><a href="privacy.html">Privacy</a></li>
-                <li><a href="terms.html">Terms</a></li>
-                <li><a href="#contact">Contact</a></li>
+    <!-- Header -->
+    <header class="header" id="header">
+        <nav class="nav container" aria-label="Primary">
+            <a href="/" class="logo" aria-label="Module Mango home">
+                <span class="monogram" aria-hidden="true">mm</span>
+                <span class="logo-text">modulemango<span class="dim">.com</span></span>
+            </a>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">./home</a></li>
+                <li><a href="#apps">./apps</a></li>
+                <li><a href="#contact">./contact</a></li>
+                <li><a href="privacy.html">privacy</a></li>
+                <li><a href="terms.html">terms</a></li>
             </ul>
 
-            <div class="mobile-toggle" aria-label="Toggle navigation">
+            <span class="nav-status" aria-label="Studio status">
+                <span class="dot" aria-hidden="true"></span>
+                <span>shipping</span>
+            </span>
+
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu" aria-controls="navLinks" aria-expanded="false">
                 <span></span>
                 <span></span>
                 <span></span>
-            </div>
+            </button>
         </nav>
     </header>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-content container">
-            <span class="hero-badge">App Development Studio</span>
-            <h1>
-                Building Apps That<br>
-                <span class="highlight">Make a Difference</span>
-            </h1>
-            <p class="hero-description">
-                We craft beautiful, intuitive mobile applications with a focus on
-                user experience and modern design. From concept to launch, we bring your ideas to life.
-            </p>
-            <div class="hero-buttons">
-                <a href="#apps" class="btn btn-primary">
-                    View Our Apps
-                </a>
-                <a href="mailto:contact@modulemango.com" class="btn btn-secondary">
-                    Get in Touch
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Apps Section -->
-    <section id="apps" class="apps">
-        <div class="container">
-            <div class="section-header fade-in">
-                <h2>Our Apps</h2>
-                <p>Discover our collection of carefully crafted applications</p>
-            </div>
-
-            <div class="apps-grid">
-                <!-- Lenda - Loan Tracker & Planner -->
-                <div class="app-card fade-in">
-                    <img src="assets/lenda-icon.webp" alt="Lenda App Icon" class="app-icon-img">
-                    <h3>Lenda</h3>
-                    <p>
-                        Track money you've lent to others. Perfect for personal lenders,
-                        microfinance operators, and small business owners.
-                    </p>
-                    <div class="app-links">
-                        <a href="https://play.google.com/store/apps/details?id=com.appblocks.loanparadise" class="app-link" target="_blank" rel="noopener">
-                            Play Store
-                        </a>
-                    </div>
+    <main>
+        <!-- Hero -->
+        <section id="home" class="hero">
+            <div class="hero-content container">
+                <div class="hero-meta">
+                    <span class="tag">v2.0</span>
+                    <span class="sep">/</span>
+                    <span>independent app studio</span>
+                    <span class="sep">/</span>
+                    <span>est. 2024</span>
                 </div>
 
-                <!-- Coming Soon Card -->
-                <div class="app-card coming-soon fade-in">
-                    <div class="app-icon"></div>
-                    <h3>Coming Soon</h3>
-                    <p>
-                        We're working on something new! Stay tuned for our
-                        upcoming app releases.
-                    </p>
-                    <div class="app-links">
-                        <a href="mailto:contact@modulemango.com" class="app-link">
-                            Get Notified
-                        </a>
-                    </div>
+                <h1>
+                    <span class="line">We build mobile apps</span>
+                    <span class="line">that <span class="accent">make a difference</span><span class="cursor" aria-hidden="true"></span></span>
+                </h1>
+
+                <p class="hero-description">
+                    <strong>Module Mango</strong> is a small, independent studio crafting
+                    beautiful, intuitive mobile applications. From concept to launch —
+                    we focus on user experience, modern design, and code that lasts.
+                </p>
+
+                <div class="hero-prompt" aria-hidden="true">
+                    <span class="prompt-path">~/studio</span>
+                    <span class="prompt-sym">$</span>
+                    <span>whoami</span>
+                </div>
+
+                <div class="typer" id="typer" aria-live="polite" aria-atomic="true">
+                    <span class="typer-text"></span><span class="caret" aria-hidden="true"></span>
+                </div>
+
+                <div class="hero-buttons">
+                    <a href="#apps" class="btn btn-primary">
+                        <span>./view-apps</span>
+                        <span class="arrow" aria-hidden="true">→</span>
+                    </a>
+                    <a href="mailto:contact@modulemango.com" class="btn btn-secondary">
+                        <span>get in touch</span>
+                    </a>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <!-- Apps -->
+        <section id="apps" class="apps">
+            <div class="container">
+                <header class="section-header reveal">
+                    <span class="num">01</span>
+                    <h2>apps</h2>
+                    <span class="meta">2 modules</span>
+                </header>
+
+                <div class="apps-grid">
+                    <!-- Lenda -->
+                    <article class="app-card reveal">
+                        <div class="app-card-bar" aria-hidden="true">
+                            <span class="dot r"></span>
+                            <span class="dot y"></span>
+                            <span class="dot g"></span>
+                            <span class="filename">lenda.app</span>
+                        </div>
+                        <div class="app-card-body">
+                            <div class="app-head">
+                                <img src="assets/lenda-icon.webp" alt="" width="56" height="56" class="app-icon-img" loading="lazy" decoding="async">
+                                <div>
+                                    <h3>Lenda</h3>
+                                    <span class="status">
+                                        <span class="dot" aria-hidden="true"></span>
+                                        live on play store
+                                    </span>
+                                </div>
+                            </div>
+
+                            <p>
+                                Track money you've lent to others. Built for personal
+                                lenders, microfinance operators, and small business owners
+                                who need a clean way to manage loans and repayments.
+                            </p>
+
+                            <div class="app-tags">
+                                <span class="tag">android</span>
+                                <span class="tag">finance</span>
+                                <span class="tag">offline-first</span>
+                            </div>
+
+                            <div class="app-links">
+                                <a href="https://play.google.com/store/apps/details?id=com.appblocks.loanparadise"
+                                   class="app-link" target="_blank" rel="noopener noreferrer">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                                    <span>Play Store</span>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Coming Soon -->
+                    <article class="app-card coming-soon reveal">
+                        <div class="app-card-bar" aria-hidden="true">
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="filename">untitled.app</span>
+                        </div>
+                        <div class="app-card-body">
+                            <div class="app-head">
+                                <div class="app-icon" aria-hidden="true">??</div>
+                                <div>
+                                    <h3>Coming Soon</h3>
+                                    <span class="status pending">
+                                        <span class="dot" aria-hidden="true"></span>
+                                        in development
+                                    </span>
+                                </div>
+                            </div>
+
+                            <p>
+                                We're working on something new. Drop us a line and we'll
+                                let you know when it ships.
+                            </p>
+
+                            <div class="app-tags">
+                                <span class="tag">tbd</span>
+                                <span class="tag">stay-tuned</span>
+                            </div>
+
+                            <div class="app-links">
+                                <a href="mailto:contact@modulemango.com?subject=Notify%20me" class="app-link">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                                    <span>get notified</span>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <!-- Footer -->
     <footer id="contact" class="footer">
-        <div class="container footer-content">
-            <div class="footer-left">
-                <a href="/" class="footer-logo">
-                    <span>🥭</span>
-                    <span>Module Mango</span>
-                </a>
-                <div class="footer-links">
-                    <a href="privacy.html">Privacy Policy</a>
-                    <a href="terms.html">Terms of Service</a>
-                    <a href="mailto:contact@modulemango.com">Contact</a>
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="/" class="logo" aria-label="Module Mango home">
+                        <span class="monogram" aria-hidden="true">mm</span>
+                        <span class="logo-text">modulemango<span class="dim">.com</span></span>
+                    </a>
+                    <p>An independent studio shipping small, well-crafted mobile apps.</p>
                 </div>
+
+                <nav class="footer-nav" aria-label="Footer">
+                    <div class="footer-col">
+                        <h4>studio</h4>
+                        <ul>
+                            <li><a href="#home">home</a></li>
+                            <li><a href="#apps">apps</a></li>
+                            <li><a href="mailto:contact@modulemango.com">contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>legal</h4>
+                        <ul>
+                            <li><a href="privacy.html">privacy policy</a></li>
+                            <li><a href="terms.html">terms of service</a></li>
+                        </ul>
+                    </div>
+                </nav>
             </div>
-            <div class="footer-right">
-                &copy; <span id="year"></span> Module Mango. All rights reserved.
+
+            <div class="footer-bottom">
+                <span>&copy; <span id="year"></span> module mango. all rights reserved.</span>
+                <span class="build">build <span>stable</span> · contact@modulemango.com</span>
             </div>
         </div>
     </footer>
 
-    <script src="js/main.js"></script>
+    <script src="js/main.js" defer></script>
 </body>
 </html>

@@ -2,45 +2,51 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Terms of Service - Module Mango">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0a0a0a">
+    <meta name="description" content="Terms of Service — Module Mango">
     <meta name="robots" content="noindex">
 
-    <title>Terms of Service - Module Mango</title>
+    <title>Terms of Service — Module Mango</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
 
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥭</text></svg>">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%234ade80'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='ui-monospace,SFMono-Regular,Menlo,monospace' font-size='16' font-weight='700' fill='%230a0a0a'%3Emm%3C/text%3E%3C/svg%3E">
 </head>
 <body>
     <!-- Header -->
-    <header class="header">
-        <nav class="nav container">
-            <a href="/" class="logo">
-                <span class="logo-icon">🥭</span>
-                <span>Module Mango</span>
+    <header class="header" id="header">
+        <nav class="nav container" aria-label="Primary">
+            <a href="/" class="logo" aria-label="Module Mango home">
+                <span class="monogram" aria-hidden="true">mm</span>
+                <span class="logo-text">modulemango<span class="dim">.com</span></span>
             </a>
 
-            <ul class="nav-links">
-                <li><a href="/">Home</a></li>
-                <li><a href="/#apps">Apps</a></li>
-                <li><a href="privacy.html">Privacy</a></li>
-                <li><a href="terms.html">Terms</a></li>
-                <li><a href="mailto:contact@modulemango.com">Contact</a></li>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="/">./home</a></li>
+                <li><a href="/#apps">./apps</a></li>
+                <li><a href="privacy.html">privacy</a></li>
+                <li><a href="terms.html" class="active">terms</a></li>
+                <li><a href="mailto:contact@modulemango.com">contact</a></li>
             </ul>
 
-            <div class="mobile-toggle" aria-label="Toggle navigation">
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu" aria-controls="navLinks" aria-expanded="false">
                 <span></span>
                 <span></span>
                 <span></span>
-            </div>
+            </button>
         </nav>
     </header>
 
     <!-- Policy Hero -->
     <section class="policy-hero">
         <div class="container">
+            <div class="crumbs"><a href="/">~</a><span class="sep">/</span>terms</div>
             <h1>Terms of Service</h1>
-            <p class="last-updated">Last updated: December 2024</p>
+            <p class="last-updated">// last updated: april 17, 2026</p>
         </div>
     </section>
 
@@ -358,24 +364,42 @@
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="container footer-content">
-            <div class="footer-left">
-                <a href="/" class="footer-logo">
-                    <span>🥭</span>
-                    <span>Module Mango</span>
-                </a>
-                <div class="footer-links">
-                    <a href="privacy.html">Privacy Policy</a>
-                    <a href="terms.html">Terms of Service</a>
-                    <a href="mailto:contact@modulemango.com">Contact</a>
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="/" class="logo" aria-label="Module Mango home">
+                        <span class="monogram" aria-hidden="true">mm</span>
+                        <span class="logo-text">modulemango<span class="dim">.com</span></span>
+                    </a>
+                    <p>An independent studio shipping small, well-crafted mobile apps.</p>
                 </div>
+
+                <nav class="footer-nav" aria-label="Footer">
+                    <div class="footer-col">
+                        <h4>studio</h4>
+                        <ul>
+                            <li><a href="/">home</a></li>
+                            <li><a href="/#apps">apps</a></li>
+                            <li><a href="mailto:contact@modulemango.com">contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>legal</h4>
+                        <ul>
+                            <li><a href="privacy.html">privacy policy</a></li>
+                            <li><a href="terms.html">terms of service</a></li>
+                        </ul>
+                    </div>
+                </nav>
             </div>
-            <div class="footer-right">
-                &copy; <span id="year"></span> Module Mango. All rights reserved.
+
+            <div class="footer-bottom">
+                <span>&copy; <span id="year"></span> module mango. all rights reserved.</span>
+                <span class="build">build <span>stable</span> · contact@modulemango.com</span>
             </div>
         </div>
     </footer>
 
-    <script src="js/main.js"></script>
+    <script src="js/main.js" defer></script>
 </body>
 </html>

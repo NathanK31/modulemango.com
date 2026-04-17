@@ -1,88 +1,197 @@
-// Module Mango - Main JavaScript
+// modulemango — main
 
-document.addEventListener('DOMContentLoaded', () => {
-    // Set current year in footer
-    const yearSpan = document.getElementById('year');
-    if (yearSpan) {
-        yearSpan.textContent = new Date().getFullYear();
+(function () {
+    'use strict';
+
+    // Mark JS as active immediately so progressive-enhancement CSS (boot overlay, .reveal)
+    // only hides content when we can guarantee we'll reveal it.
+    document.documentElement.classList.add('js');
+
+    const init = () => {
+        bootOverlay();
+        setFooterYear();
+        wireMobileNav();
+        wireHeaderScroll();
+        wireSmoothScroll();
+        wireReveal();
+        wireTyper();
+        wireActiveNav();
+    };
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init, { once: true });
+    } else {
+        init();
     }
 
-    // Mobile navigation toggle
-    const mobileToggle = document.querySelector('.mobile-toggle');
-    const navLinks = document.querySelector('.nav-links');
+    function bootOverlay() {
+        const boot = document.getElementById('boot');
+        if (!boot) return;
 
-    if (mobileToggle && navLinks) {
-        mobileToggle.addEventListener('click', () => {
-            mobileToggle.classList.toggle('active');
-            navLinks.classList.toggle('active');
+        // Sequence:
+        // 0.05s line 1 appears
+        // 0.25s line 2 appears
+        // 0.45s line 3 appears
+        // 0.65s line 4 (pending) appears, animated dots
+        // 1.10s flip line 4 from [ .. ] booting ui  →  [ OK ] ready
+        // 1.35s fade overlay out (0.4s transition)
+        // 1.75s remove overlay from DOM
+
+        const last = document.getElementById('bootLast');
+        window.setTimeout(() => {
+            if (!last) return;
+            last.innerHTML = '<span class="status ok">[ OK ]</span> ready_';
+        }, 1100);
+
+        window.setTimeout(() => {
+            boot.classList.add('done');
+            document.documentElement.classList.add('booted');
+        }, 1350);
+
+        window.setTimeout(() => boot.remove(), 1750);
+    }
+
+    function setFooterYear() {
+        const el = document.getElementById('year');
+        if (el) el.textContent = String(new Date().getFullYear());
+    }
+
+    function wireMobileNav() {
+        const toggle = document.getElementById('mobileToggle');
+        const links = document.getElementById('navLinks');
+        if (!toggle || !links) return;
+
+        toggle.addEventListener('click', () => {
+            const open = links.classList.toggle('active');
+            toggle.classList.toggle('active', open);
+            toggle.setAttribute('aria-expanded', String(open));
         });
 
-        // Close mobile menu when a link is clicked
-        navLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileToggle.classList.remove('active');
-                navLinks.classList.remove('active');
+        links.querySelectorAll('a').forEach((a) => {
+            a.addEventListener('click', () => {
+                links.classList.remove('active');
+                toggle.classList.remove('active');
+                toggle.setAttribute('aria-expanded', 'false');
             });
         });
     }
 
-    // Header scroll effect
-    const header = document.querySelector('.header');
-    let lastScroll = 0;
-
-    window.addEventListener('scroll', () => {
-        const currentScroll = window.pageYOffset;
-
-        if (currentScroll > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-
-        lastScroll = currentScroll;
-    });
-
-    // Fade-in animations on scroll
-    const fadeElements = document.querySelectorAll('.fade-in');
-
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1
-    };
-
-    const fadeObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                fadeObserver.unobserve(entry.target);
+    function wireHeaderScroll() {
+        const header = document.getElementById('header');
+        if (!header) return;
+        let ticking = false;
+        const update = () => {
+            header.classList.toggle('scrolled', window.scrollY > 12);
+            ticking = false;
+        };
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(update);
+                ticking = true;
             }
-        });
-    }, observerOptions);
+        }, { passive: true });
+        update();
+    }
 
-    fadeElements.forEach(element => {
-        fadeObserver.observe(element);
-    });
-
-    // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            const href = this.getAttribute('href');
-
-            // Skip if it's just "#"
-            if (href === '#') return;
-
-            const target = document.querySelector(href);
-            if (target) {
+    function wireSmoothScroll() {
+        const header = document.getElementById('header');
+        document.querySelectorAll('a[href^="#"]').forEach((a) => {
+            a.addEventListener('click', (e) => {
+                const href = a.getAttribute('href');
+                if (!href || href === '#') return;
+                const target = document.querySelector(href);
+                if (!target) return;
                 e.preventDefault();
-                const headerHeight = header.offsetHeight;
-                const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-            }
+                const offset = (header ? header.offsetHeight : 0) + 8;
+                const top = target.getBoundingClientRect().top + window.scrollY - offset;
+                window.scrollTo({ top, behavior: 'smooth' });
+            });
         });
-    });
-});
+    }
+
+    function wireReveal() {
+        const els = document.querySelectorAll('.reveal');
+        if (!els.length) return;
+        if (!('IntersectionObserver' in window)) {
+            els.forEach((el) => el.classList.add('visible'));
+            return;
+        }
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    io.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        els.forEach((el) => io.observe(el));
+    }
+
+    function wireTyper() {
+        const typer = document.getElementById('typer');
+        if (!typer) return;
+        const target = typer.querySelector('.typer-text');
+        if (!target) return;
+
+        const phrases = [
+            'an independent app development studio',
+            'mobile-first · design-driven · code that lasts',
+            'beautifully built. ship it.'
+        ];
+
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let deleting = false;
+
+        const tick = () => {
+            const current = phrases[phraseIndex];
+            if (deleting) {
+                charIndex--;
+                target.textContent = current.slice(0, charIndex);
+                if (charIndex === 0) {
+                    deleting = false;
+                    phraseIndex = (phraseIndex + 1) % phrases.length;
+                    window.setTimeout(tick, 420);
+                    return;
+                }
+                window.setTimeout(tick, 22);
+            } else {
+                charIndex++;
+                target.textContent = current.slice(0, charIndex);
+                if (charIndex === current.length) {
+                    deleting = true;
+                    window.setTimeout(tick, 2100);
+                    return;
+                }
+                window.setTimeout(tick, 48);
+            }
+        };
+
+        // Wait for boot overlay to finish before starting
+        window.setTimeout(tick, 1450);
+    }
+
+    function wireActiveNav() {
+        const sections = document.querySelectorAll('main section[id]');
+        const links = document.querySelectorAll('.nav-links a[href^="#"]');
+        if (!sections.length || !links.length || !('IntersectionObserver' in window)) return;
+
+        const map = new Map();
+        links.forEach((a) => {
+            const hash = a.getAttribute('href');
+            if (hash && hash.length > 1) map.set(hash.slice(1), a);
+        });
+
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    links.forEach((a) => a.classList.remove('active'));
+                    const a = map.get(entry.target.id);
+                    if (a) a.classList.add('active');
+                }
+            });
+        }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
+
+        sections.forEach((s) => io.observe(s));
+    }
+})();
