@@ -776,9 +776,6 @@ html.js .boot {
     transition: opacity 0.4s var(--ease);
 }
 
-html.js body { overflow: hidden; }
-html.js.booted body { overflow: auto; }
-
 .boot::before {
     content: '';
     position: absolute;

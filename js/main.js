@@ -28,6 +28,10 @@
         const boot = document.getElementById('boot');
         if (!boot) return;
 
+        // Lock scroll only while the overlay is active
+        const prevOverflow = document.body.style.overflow;
+        document.body.style.overflow = 'hidden';
+
         // Sequence:
         // 0.05s line 1 appears
         // 0.25s line 2 appears
@@ -45,7 +49,7 @@
 
         window.setTimeout(() => {
             boot.classList.add('done');
-            document.documentElement.classList.add('booted');
+            document.body.style.overflow = prevOverflow;
         }, 1350);
 
         window.setTimeout(() => boot.remove(), 1750);
