@@ -733,7 +733,8 @@ section { padding: 6rem 0; }
 
 .policy-content p { margin-bottom: 1rem; }
 
-.policy-content ul {
+.policy-content ul,
+.policy-content ol {
     margin: 0.75rem 0 1rem;
     padding-left: 1.25rem;
 }
@@ -749,6 +750,13 @@ section { padding: 6rem 0; }
     border-bottom: 1px dashed rgba(74, 222, 128, 0.3);
 }
 .policy-content a:hover { color: var(--green-bright); border-color: var(--green); }
+
+/* Buttons inside policy content keep their own styling, not the link styling */
+.policy-content a.btn { border-bottom: none; }
+.policy-content a.btn-primary { color: var(--bg); }
+.policy-content a.btn-primary:hover { color: var(--bg); border-color: transparent; }
+.policy-content a.btn-secondary { color: var(--text); }
+.policy-content a.btn-secondary:hover { color: var(--green); }
 
 /* ===== Reveal animation (only hidden when JS confirmed active) ===== */
 html.js .reveal {
